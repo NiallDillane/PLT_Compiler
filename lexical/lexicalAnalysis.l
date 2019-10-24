@@ -54,7 +54,7 @@ PRINT {
 	printf("%s: is a number\n", yytext); 
 }
 
-\".*\" {
+\"[^"]*\" {
 	printf("%s: is a string\n", yytext); 
 }
 
@@ -66,7 +66,12 @@ PRINT {
 	printf("%s: is the end of a line\n", yytext); 
 }
 
-{idChar}{8,} { 
+; {
+	printf("%s: is a separator\n", yytext);
+}
+
+{idChar}{8,} |
+. { 
 	printf("%s is not part of the language\n", yytext); 
 }
 
