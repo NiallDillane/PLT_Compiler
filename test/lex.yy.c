@@ -770,23 +770,23 @@ case 11:
 #line 26 "verb.l"
 case 12:
 YY_RULE_SETUP
-#line 27 "verb.l"
+#line 26 "verb.l"
 { printf("%s: is a verb\n", yytext); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 29 "verb.l"
+#line 28 "verb.l"
 { printf("%s is not a verb\n", yytext); }
 	YY_BREAK
 case 14:
 /* rule 14 can match eol */
 YY_RULE_SETUP
-#line 31 "verb.l"
+#line 30 "verb.l"
 { ECHO; } // normal default anyway
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 33 "verb.l"
+#line 32 "verb.l"
 ECHO;
 	YY_BREAK
 #line 793 "lex.yy.c"
@@ -1786,7 +1786,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 33 "verb.l"
+#line 32 "verb.l"
 
 
 

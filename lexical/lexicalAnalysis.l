@@ -1,40 +1,77 @@
 %{
-   /*
-    * Simple verb recognition
-    * insert C libraries here
-   */
+	/*
+	 * Simple verb recognition
+	 * insert C libraries here
+	*/
 %}
 
 %option noyywrap
 %option caseless
 %option yylineno
 
+
+doubleDec	X+|X+-X+
+num			[0-9]+|[0-9]+.[0-9]+
+idChar		[a-zA-Z0-9-]
+id				[a-zA-Z]{1}{idChar}{0,6}
+
 %% 
 
-   /*
-    * Main section with RegEx
-   */
+	/*
+	 * Main section with RegEx
+	*/
 
-[\n\t ]+ 
+[\n\t\r ]+ 
 
 START. |
-END-NOW. |
-X+ |
-[X]+-[X]+ { 
-   printf("%s: is a declaration\n", yytext); 
+END-NOW. | 
+MAIN. { 
+	printf("%s: is a keyword\n", yytext); 
 }
 
-
-END |
-whatever { 
-   printf("%s: is an assignment\n", yytext); 
+{doubleDec} {
+	printf("%s: is a double\n", yytext); 
 }
 
-X+-* |
-. | \n { printf("%s is not part of the language\n", yytext); } // normal default anyway
+EQUALS-TO |
+EQUALS-TO-VALUE { 
+	printf("%s: is an assignment\n", yytext); 
+}
+
+ADD.*TO.* { 
+	printf("%s: is an assignment\n", yytext); 
+}
+
+INPUT { 
+	printf("%s: is an input\n", yytext); 
+}
+
+PRINT { 
+	printf("%s: is an output\n", yytext); 
+}
+
+{num} { 
+	printf("%s: is a number\n", yytext); 
+}
+
+\".*\" {
+	printf("%s: is a string\n", yytext); 
+}
+
+{id} { 
+	printf("%s: is an identifier\n", yytext); 
+}
+
+.[" "]*$ {
+	printf("%s: is the end of a line\n", yytext); 
+}
+
+{idChar}{8,} { 
+	printf("%s is not part of the language\n", yytext); 
+}
 
 %%
 
 int main(){
-   yylex();
+	yylex();
 }
