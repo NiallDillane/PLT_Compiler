@@ -8,5 +8,5 @@ INPUT Y-S.
 Z EQUALS-TO 15.00. 
 ADD Y-S TO Z. 
 PRINT "Result is "; Z.
-END-NOW
+END-NOW.
 
