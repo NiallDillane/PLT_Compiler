@@ -38,7 +38,8 @@ EQUALS-TO-VALUE {
 	printf("%s: is an assignment\n", yytext); 
 }
 
-ADD.*TO.* { 
+ADD |
+TO { 
 	printf("%s: is an assignment\n", yytext); 
 }
 
