@@ -914,103 +914,79 @@ case 3:
 case 4:
 YY_RULE_SETUP
 #line 28 "lexicalAnalysis.l"
-{ 
-	printf("%s: is a keyword\n", yytext); 
-}
+{ printf("%s: is a keyword\n", yytext); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 32 "lexicalAnalysis.l"
-{
-	printf("%s: is a double\n", yytext); 
-}
+#line 30 "lexicalAnalysis.l"
+{ printf("%s: is a double\n", yytext); }
 	YY_BREAK
 case 6:
-#line 37 "lexicalAnalysis.l"
+#line 33 "lexicalAnalysis.l"
 case 7:
 YY_RULE_SETUP
-#line 37 "lexicalAnalysis.l"
-{ 
-	printf("%s: is an assignment\n", yytext); 
-}
+#line 33 "lexicalAnalysis.l"
+{ printf("%s: is an assignment\n", yytext); }
 	YY_BREAK
 case 8:
-#line 42 "lexicalAnalysis.l"
+#line 36 "lexicalAnalysis.l"
 case 9:
 YY_RULE_SETUP
-#line 42 "lexicalAnalysis.l"
-{ 
-	printf("%s: is an assignment\n", yytext); 
-}
+#line 36 "lexicalAnalysis.l"
+{ printf("%s: is an assignment\n", yytext); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 46 "lexicalAnalysis.l"
-{ 
-	printf("%s: is an input\n", yytext); 
-}
+#line 38 "lexicalAnalysis.l"
+{ printf("%s: is an input\n", yytext); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 50 "lexicalAnalysis.l"
-{ 
-	printf("%s: is an output\n", yytext); 
-}
+#line 40 "lexicalAnalysis.l"
+{ printf("%s: is an output\n", yytext); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 54 "lexicalAnalysis.l"
-{ 
-	printf("%s: is a number\n", yytext); 
-}
+#line 42 "lexicalAnalysis.l"
+{ printf("%s: is a number\n", yytext); }
 	YY_BREAK
 case 13:
 /* rule 13 can match eol */
 YY_RULE_SETUP
-#line 58 "lexicalAnalysis.l"
-{
-	printf("%s: is a string\n", yytext); 
-}
+#line 44 "lexicalAnalysis.l"
+{ printf("%s: is a string\n", yytext); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 62 "lexicalAnalysis.l"
-{ 
-	printf("%s: is an identifier\n", yytext); 
-}
+#line 46 "lexicalAnalysis.l"
+{ printf("%s: is an identifier\n", yytext); }
 	YY_BREAK
 case 15:
 *yy_cp = (yy_hold_char); /* undo effects of setting up yytext */
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 66 "lexicalAnalysis.l"
-{
-	printf("%s: is the end of a line\n", yytext); 
-}
+#line 48 "lexicalAnalysis.l"
+{ printf("%s: is the end of a line\n", yytext); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 70 "lexicalAnalysis.l"
-{
-	printf("%s: is a separator\n", yytext);
-}
+#line 50 "lexicalAnalysis.l"
+{ printf("%s: is a separator\n", yytext); }
 	YY_BREAK
 case 17:
-#line 75 "lexicalAnalysis.l"
+#line 53 "lexicalAnalysis.l"
 case 18:
 YY_RULE_SETUP
-#line 75 "lexicalAnalysis.l"
-{ 
-	printf("%s is not part of the language\n", yytext); 
-}
+#line 53 "lexicalAnalysis.l"
+{ printf("%s is not part of the language\n", yytext); }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 79 "lexicalAnalysis.l"
+#line 55 "lexicalAnalysis.l"
 ECHO;
 	YY_BREAK
-#line 1014 "lex.yy.c"
+#line 990 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2019,7 +1995,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 79 "lexicalAnalysis.l"
+#line 55 "lexicalAnalysis.l"
 
 
 
