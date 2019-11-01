@@ -436,7 +436,7 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    22,    22
+       0,    24,    24
 };
 #endif
 
@@ -1550,7 +1550,7 @@ yyreturn:
 }
 
 
-#line 24 "parser.y"
+#line 26 "parser.y"
 
 extern FILE *yyin;
 main(){

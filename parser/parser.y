@@ -18,8 +18,32 @@ int yyerror(char *s);
 	char *var;
 	double num;
 }
+
 %%
-begin: START EOL
+
+prog: 
+	START EOL decs END EOL
+;
+
+decs: 
+	dec decs
+	| body
+;
+
+dec:
+	CAPACITY IDENTIFIER EOL
+	| error
+;
+
+stmt:
+	STRING {
+		printf("This is your string");
+	}
+	| NUM {
+		printf("That is a number");
+	}
+	| OTHER
+;
 
 %%
 extern FILE *yyin;
