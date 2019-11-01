@@ -14,9 +14,11 @@
 */
 	#include<stdio.h>
 
-	extern int yylex();
-	extern int yyerror(char *s);
-	extern int yylineno;
+	int yylex();
+	int yyerror(char *s);
+	int addVar(char *cap, char *id);
+	int yylineno;
+	char *varList[50][2];
 
 %}
 
@@ -43,7 +45,7 @@ decs:
 ;
 
 dec:
-	CAPACITY IDENTIFIER EOL
+	CAPACITY IDENTIFIER EOL { addVar($1, $2); }
 	| error
 ;
 
@@ -81,4 +83,21 @@ int main(){
 int yyerror(char *s){
 	fprintf(stderr, "Error: %s\n\ton line %d\n", s, yylineno);
 	return 0;
+}
+
+int addVar(char *cap, char *id){
+	int i;
+	for(i=0; i < 50; i++){
+		if(varList[1][i] == id){ // check if id already exists
+			fprintf(stderr, "Variable: %s already exists\n\ton line %d\n", id, yylineno);
+			return 0;
+		}
+		else if(*varList[0][i] == '\0'){
+			break;
+		}
+	}
+	varList[0][i] = cap;
+	varList[1][i] = id;
+
+	return 1;
 }
