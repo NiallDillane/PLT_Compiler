@@ -45,7 +45,7 @@ decs:
 ;
 
 dec:
-	CAPACITY IDENTIFIER EOL { addVar($1, $2); }
+	CAPACITY IDENTIFIER EOL { addVar($1, $2); } 
 	| error
 ;
 
@@ -88,16 +88,14 @@ int yyerror(char *s){
 int addVar(char *cap, char *id){
 	int i;
 	for(i=0; i < 50; i++){
-		if(varList[1][i] == id){ // check if id already exists
+		if(varList[i][1] == id){ // check if id already exists
 			fprintf(stderr, "Variable: %s already exists\n\ton line %d\n", id, yylineno);
 			return 0;
 		}
-		else if(*varList[0][i] == '\0'){
+		else if(varList[i][0] == '\0'){
 			break;
 		}
 	}
-	varList[0][i] = cap;
-	varList[1][i] = id;
-
-	return 1;
+	varList[i][0] = cap;
+	varList[i][1] = id;
 }
