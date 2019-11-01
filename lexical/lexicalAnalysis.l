@@ -23,9 +23,9 @@ id				[a-zA-Z]{1}{idChar}{0,6}
 
 [\n\t\r ]+ 
 
-START. |
-END-NOW. | 
-MAIN. 				{ printf("%s: is a keyword\n", yytext); }
+START |
+END-NOW | 
+MAIN 				   { printf("%s: is a keyword\n", yytext); }
 
 {doubleDec} 		{ printf("%s: is a double\n", yytext); }
 

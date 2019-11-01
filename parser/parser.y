@@ -1,9 +1,32 @@
 %{
-/* Limited sentence recogniser */
-#include<stdio.h>
+/* Limited sentence recogniser 
+	
 
-int yylex();
-int yyerror(char *s);
+	decs: 
+		dec decs
+		| 
+	;
+
+	dec:
+		CAPACITY IDENTIFIER EOL
+		| error
+	;
+
+	stmt:
+	STRING {
+		printf("This is your string");
+	}
+	| NUM {
+		printf("That is a number");
+	}
+	| OTHER
+
+;*/
+	#include<stdio.h>
+
+	extern int yylex();
+	extern int yyerror(char *s);
+	extern int yylineno;
 
 %}
 
@@ -20,38 +43,17 @@ int yyerror(char *s);
 }
 
 %%
-
 prog: 
-	START EOL decs END EOL
+	START { printf("go fuck yourself"); }
 ;
-
-decs: 
-	dec decs
-	| body
-;
-
-dec:
-	CAPACITY IDENTIFIER EOL
-	| error
-;
-
-stmt:
-	STRING {
-		printf("This is your string");
-	}
-	| NUM {
-		printf("That is a number");
-	}
-	| OTHER
-;
-
 %%
 extern FILE *yyin;
-main(){
+int main(){
+	yyin = stdin;
 	do yyparse();
 		while(!feof(yyin));
 }
 
-yyerror(char *s){
+int yyerror(char *s){
 	fprintf(stderr, "%s\n", s);
 }
