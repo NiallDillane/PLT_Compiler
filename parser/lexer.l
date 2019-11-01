@@ -24,33 +24,37 @@ id				[a-zA-Z]{1}{idChar}{0,6}
 
 [\n\t\r ]+ 
 
-START					return(START);
-END-NOW 				return(END);
-MAIN             	return(MAIN);
+START					{ return(START); }
+
+END-NOW 				{ return(END); }
+
+MAIN             	{ return(MAIN); }
 
 {doubleDec} 		{ yylval.var = yytext; return(CAPACITY);}
 
-EQUALS-TO 			return(EQUALSTO);
-EQUALS-TO-VALUE 	return(EQUALSTOVALUE);
+EQUALS-TO 			{ return(EQUALSTO); }
 
-ADD 					return(ADD);
-TO 					return(TO);
+EQUALS-TO-VALUE 	{ return(EQUALSTOVALUE); }
 
-INPUT 				return(INPUT);
+ADD 					{ return(ADD); }
 
-PRINT 				return(OUTPUT);
+TO 					{ return(TO); }
+
+INPUT 				{ return(INPUT); }
+
+PRINT 				{ return(OUTPUT); }
 
 {num} 				{ yylval.num = atof(yytext); return(NUMBER);}
 
-\"[^"]*\" 			return(STRING);
+\"[^"]*\" 			{ return(STRING); }
 
 {id} 					{ yylval.var = yytext; return(IDENTIFIER);}
 
-.[" "]*$ 			return(EOL);
+.[" "]*$ 			{ return(EOL); }
 
-; 						return(SEPARATOR);
+; 						{ return(SEPARATOR); }
 
 {idChar}{8,} |
-. 						return(0);
+. 						{ return(0); }
 
 %%

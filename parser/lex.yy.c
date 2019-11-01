@@ -903,67 +903,67 @@ YY_RULE_SETUP
 case 2:
 YY_RULE_SETUP
 #line 27 "lexer.l"
-return(START);
+{ return(START); }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 28 "lexer.l"
-return(END);
+#line 29 "lexer.l"
+{ return(END); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 29 "lexer.l"
-return(MAIN);
+#line 31 "lexer.l"
+{ return(MAIN); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 31 "lexer.l"
+#line 33 "lexer.l"
 { yylval.var = yytext; return(CAPACITY);}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 33 "lexer.l"
-return(EQUALSTO);
+#line 35 "lexer.l"
+{ return(EQUALSTO); }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 34 "lexer.l"
-return(EQUALSTOVALUE);
+#line 37 "lexer.l"
+{ return(EQUALSTOVALUE); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 36 "lexer.l"
-return(ADD);
+#line 39 "lexer.l"
+{ return(ADD); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 37 "lexer.l"
-return(TO);
+#line 41 "lexer.l"
+{ return(TO); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 39 "lexer.l"
-return(INPUT);
+#line 43 "lexer.l"
+{ return(INPUT); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 41 "lexer.l"
-return(OUTPUT);
+#line 45 "lexer.l"
+{ return(OUTPUT); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 43 "lexer.l"
+#line 47 "lexer.l"
 { yylval.num = atof(yytext); return(NUMBER);}
 	YY_BREAK
 case 13:
 /* rule 13 can match eol */
 YY_RULE_SETUP
-#line 45 "lexer.l"
-return(STRING);
+#line 49 "lexer.l"
+{ return(STRING); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 47 "lexer.l"
+#line 51 "lexer.l"
 { yylval.var = yytext; return(IDENTIFIER);}
 	YY_BREAK
 case 15:
@@ -971,24 +971,24 @@ case 15:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 49 "lexer.l"
-return(EOL);
+#line 53 "lexer.l"
+{ return(EOL); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 51 "lexer.l"
-return(SEPARATOR);
+#line 55 "lexer.l"
+{ return(SEPARATOR); }
 	YY_BREAK
 case 17:
-#line 54 "lexer.l"
+#line 58 "lexer.l"
 case 18:
 YY_RULE_SETUP
-#line 54 "lexer.l"
-return(0);
+#line 58 "lexer.l"
+{ return(0); }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 56 "lexer.l"
+#line 60 "lexer.l"
 ECHO;
 	YY_BREAK
 #line 995 "lex.yy.c"
@@ -2000,7 +2000,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 56 "lexer.l"
+#line 60 "lexer.l"
 
 
 

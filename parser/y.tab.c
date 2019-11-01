@@ -128,12 +128,14 @@
 	}
 	| OTHER
 
-;*/
+;
+*/
 	#include<stdio.h>
-
+	
 	extern int yylex();
 	extern int yyerror(char *s);
 	extern int yylineno;
+
 
 
 /* Enabling traces.  */
@@ -156,13 +158,13 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 36 "parser.y"
+#line 41 "parser.y"
 {
 	char *var;
 	double num;
 }
 /* Line 193 of yacc.c.  */
-#line 166 "y.tab.c"
+#line 168 "y.tab.c"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
@@ -175,7 +177,7 @@ typedef union YYSTYPE
 
 
 /* Line 216 of yacc.c.  */
-#line 179 "y.tab.c"
+#line 181 "y.tab.c"
 
 #ifdef short
 # undef short
@@ -458,7 +460,7 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    42,    42
+       0,    48,    48
 };
 #endif
 
@@ -1357,13 +1359,13 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 42 "parser.y"
-    { printf("go fuck yourself"); }
+#line 48 "parser.y"
+    { printf("starting yay"); }
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1367 "y.tab.c"
+#line 1369 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1577,7 +1579,7 @@ yyreturn:
 }
 
 
-#line 44 "parser.y"
+#line 50 "parser.y"
 
 extern FILE *yyin;
 int main(){
