@@ -80,7 +80,7 @@
 
 
 /* Copy the first part of user declarations.  */
-#line 1 "sentences.y"
+#line 1 "parser.y"
 
 /* Limited sentence recogniser */
 #include<stdio.h>
@@ -117,7 +117,7 @@ typedef int YYSTYPE;
 
 
 /* Line 216 of yacc.c.  */
-#line 121 "sentences.tab.c"
+#line 121 "parser.tab.c"
 
 #ifdef short
 # undef short
@@ -1296,13 +1296,13 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 8 "sentences.y"
+#line 8 "parser.y"
     { printf("Is a valid Sentence!\n"); ;}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1306 "sentences.tab.c"
+#line 1306 "parser.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1516,7 +1516,7 @@ yyreturn:
 }
 
 
-#line 9 "sentences.y"
+#line 9 "parser.y"
 
 extern FILE *yyin;
 main(){
