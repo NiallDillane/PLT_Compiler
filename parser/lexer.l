@@ -44,7 +44,7 @@ INPUT 				{ return(INPUT); }
 
 PRINT 				{ return(OUTPUT); }
 
-{num} 				{ yylval.num = atof(yytext); return(NUMBER);}
+{num} 				{ yylval.num = strdup(yytext); return(NUMBER);}
 
 \"[^"]*\" 			{ return(STRING); }
 

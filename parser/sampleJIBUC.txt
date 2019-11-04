@@ -1,8 +1,7 @@
 START.
 XX-XX Y-S.
-XX-XX Z. 
+XX-XXX Z. 
 X-XX XY-1.
-XX-X Z. 
 MAIN.
 PRINT "Please enter a number? ". 
 INPUT Y-S.

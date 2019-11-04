@@ -3,15 +3,23 @@
  * JIBUC parser
 */
 	#include <stdio.h>
+	#include <string.h>
+	#include <stdbool.h>
+	#include <ctype.h>
 	#define RED "\x1B[31m"
 	#define GRN "\x1B[32m"
 	#define RESET "\x1B[0m"
 
 	int yylex();
 	int yyerror(char *s);
+	char* catError(char *s, char *t);
+	char* doubleX(char *val);
 	int addVar(char *cap, char *id);
+	int checkType(char *id, char *val);
+
 	int yylineno;
 	char *varList[50][2];
+	bool valid = true;
 
 %}
 
@@ -24,12 +32,12 @@
 
 %union {
 	char *var;
-	double num;
+	char *num;
 }
 
 %%
 prog: 
-	START EOL decs MAIN EOL stmts END EOL { printf(GRN "valid file\n" RESET); }
+	START EOL decs MAIN EOL stmts END EOL 
 ;
 
 decs: 
@@ -49,7 +57,7 @@ stmts:
 
 stmt:
 	IDENTIFIER EQUALSTO IDENTIFIER EOL
-	| IDENTIFIER EQUALSTOVALUE NUMBER EOL
+	| IDENTIFIER EQUALSTOVALUE NUMBER EOL { checkType($1, $3); }
 	| ADD NUMBER TO IDENTIFIER EOL
 	| ADD IDENTIFIER TO IDENTIFIER EOL
 	| INPUT ins EOL
@@ -72,29 +80,68 @@ int main() {
 	yyin = fopen("sampleJIBUC.txt", "r");
 	do yyparse();
 		while(!feof(yyin));
+
+	if(valid)
+		printf(GRN "valid file\n" RESET);
 	return 0;
 }
 
 int yyerror(char *s) {
-	fprintf(stderr, RED "Error: %s\n\ton line %d\n" RESET, s, yylineno);
+	fprintf(stderr, RED "Error " RESET "on line %d:\n\t%s\n", yylineno, s);
+	valid = false;
 	return 0;
+}
+
+char* catError(char *s, char *t) {
+	char *catmsg = malloc(strlen(s) + strlen(t));
+	strcpy(catmsg, s);
+	strcat(catmsg, t);
+	return catmsg;
+}
+
+char* doubleX(char *val){
+	for(int j = 0; j < strlen(val); j++){
+		if(isdigit(val[j]))
+			val[j] = 'X';
+		else
+			val[j] = '-';
+	}
+	return val;
 }
 
 int addVar(char *cap, char *id) { 
 	int i;
 	for(i=0; i < 50; i++) {
-		if(varList[i][1] == id) { // check if id already exists
-			fprintf(stderr, RED "Variable: %s already exists\n\ton line %d\n" RESET, id, yylineno);
-			return 0;
-		}
-		else if(varList[i][0] == '\0'){
+		if(varList[i][0] == '\0'){
 			break;
+		}
+		else if(strcmp(varList[i][1], id) == 0) { // check if id already exists
+			yyerror(catError("Variable already exists: ", id));
+			return 0;
 		}
 	}
 	varList[i][0] = cap;
 	varList[i][1] = id;
 
-	printf("%d:\t %s , %s\n", i, varList[i][0], varList[i][1]);
+	// printf("%d:\t %s , %s\n", i, varList[i][0], varList[i][1]);
 
+	return 0;
+}
+
+int checkType(char *id, char *val){
+	int i;
+	for(i=0; i < 50; i++) {
+		if(varList[i][0] == '\0'){
+			yyerror(catError("Variable not declared: ", id));
+			return 0;
+		}
+		else if(strcmp(varList[i][1], id) == 0) { 
+			char *valX = doubleX(val);
+
+			if(!(strcmp(varList[i][0], valX) == 0))
+				yyerror("id capacity and number format do not match");
+			return 0;
+		}
+	}
 	return 0;
 }
