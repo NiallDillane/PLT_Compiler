@@ -1,18 +1,11 @@
 %{
-/* Limited sentence recogniser 
-	
-	stmt:
-	STRING {
-		printf("This is your string");
-	}
-	| NUM {
-		printf("That is a number");
-	}
-	| OTHER
-
-;
+/* 
+ * JIBUC parser
 */
-	#include<stdio.h>
+	#include <stdio.h>
+	#define RED "\x1B[31m"
+	#define GRN "\x1B[32m"
+	#define RESET "\x1B[0m"
 
 	int yylex();
 	int yyerror(char *s);
@@ -29,14 +22,14 @@
 %type <var> IDENTIFIER
 %type <num> NUMBER
 
-%union{
+%union {
 	char *var;
 	double num;
 }
 
 %%
 prog: 
-	START EOL decs stmts END EOL { printf("valid\n"); }
+	START EOL decs MAIN EOL stmts END EOL { printf(GRN "valid file\n" RESET); }
 ;
 
 decs: 
@@ -50,7 +43,7 @@ dec:
 ;
 
 stmts:
-	MAIN EOL stmt stmts
+	stmt stmts
 	| 
 ;
 
@@ -75,21 +68,23 @@ outs:
 
 
 extern FILE *yyin;
-int main(){
+int main() {
+	yyin = fopen("sampleJIBUC.txt", "r");
 	do yyparse();
 		while(!feof(yyin));
-}
-
-int yyerror(char *s){
-	fprintf(stderr, "Error: %s\n\ton line %d\n", s, yylineno);
 	return 0;
 }
 
-int addVar(char *cap, char *id){
+int yyerror(char *s) {
+	fprintf(stderr, RED "Error: %s\n\ton line %d\n" RESET, s, yylineno);
+	return 0;
+}
+
+int addVar(char *cap, char *id) { 
 	int i;
-	for(i=0; i < 50; i++){
-		if(varList[i][1] == id){ // check if id already exists
-			fprintf(stderr, "Variable: %s already exists\n\ton line %d\n", id, yylineno);
+	for(i=0; i < 50; i++) {
+		if(varList[i][1] == id) { // check if id already exists
+			fprintf(stderr, RED "Variable: %s already exists\n\ton line %d\n" RESET, id, yylineno);
 			return 0;
 		}
 		else if(varList[i][0] == '\0'){
@@ -98,4 +93,8 @@ int addVar(char *cap, char *id){
 	}
 	varList[i][0] = cap;
 	varList[i][1] = id;
+
+	printf("%d:\t %s , %s\n", i, varList[i][0], varList[i][1]);
+
+	return 0;
 }

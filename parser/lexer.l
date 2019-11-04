@@ -30,7 +30,7 @@ END-NOW 				{ return(END); }
 
 MAIN             	{ return(MAIN); }
 
-{doubleDec} 		{ yylval.var = yytext; return(CAPACITY);}
+{doubleDec} 		{ yylval.var = strdup(yytext); return(CAPACITY);}
 
 EQUALS-TO 			{ return(EQUALSTO); }
 
@@ -48,7 +48,7 @@ PRINT 				{ return(OUTPUT); }
 
 \"[^"]*\" 			{ return(STRING); }
 
-{id} 					{ yylval.var = yytext; return(IDENTIFIER);}
+{id} 					{ yylval.var = strdup(yytext); return(IDENTIFIER);}
 
 .[" "]*$ 			{ return(EOL); }
 
