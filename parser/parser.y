@@ -15,7 +15,8 @@
 	char* catError(char *s, char *t);
 	char* doubleX(char *val);
 	int addVar(char *cap, char *id);
-	int checkType(char *id, char *val);
+	int checkVar(char *id1, char *id2);
+	int checkVal(char *id, char *val);
 
 	int yylineno;
 	char *varList[50][2];
@@ -56,10 +57,10 @@ stmts:
 ;
 
 stmt:
-	IDENTIFIER EQUALSTO IDENTIFIER EOL
-	| IDENTIFIER EQUALSTOVALUE NUMBER EOL { checkType($1, $3); }
-	| ADD NUMBER TO IDENTIFIER EOL
-	| ADD IDENTIFIER TO IDENTIFIER EOL
+	IDENTIFIER EQUALSTO IDENTIFIER EOL { checkCap($1, $3); }
+	| IDENTIFIER EQUALSTOVALUE NUMBER EOL { checkVal($1, $3); }
+	| ADD NUMBER TO IDENTIFIER EOL { /* TODO */}
+	| ADD IDENTIFIER TO IDENTIFIER EOL { /* TODO */}
 	| INPUT ins EOL
 	| OUTPUT outs EOL
 
@@ -128,7 +129,25 @@ int addVar(char *cap, char *id) {
 	return 0;
 }
 
-int checkType(char *id, char *val){
+int checkVar(char *id1, char *id2){
+	int i;
+	for(i=0; i < 50; i++) {
+		if(varList[i][0] == '\0'){ // TODO: check if exists method
+			yyerror(catError("Variable not declared: ", id));
+			return 0;
+		}
+		else if(strcmp(varList[i][1], id) == 0) { 
+			char *valX = doubleX(val);
+
+			if(!(strcmp(varList[i][0], valX) == 0))
+				yyerror("id capacity and number format do not match");
+			return 0;
+		}
+	}
+	return 0;
+}
+
+int checkVal(char *id, char *val){
 	int i;
 	for(i=0; i < 50; i++) {
 		if(varList[i][0] == '\0'){
