@@ -3,6 +3,8 @@
 	 * Simple verb recognition
 	 * insert C libraries here
 	*/
+	#include <stdlib.h>
+	#include <stdio.h>
 %}
 
 %option noyywrap
@@ -27,7 +29,26 @@ START |
 END-NOW | 
 MAIN 				   { printf("%s: is a keyword\n", yytext); }
 
-{doubleDec} 		{ printf("%s: is a double\n", yytext); }
+{doubleDec} 		{ 
+							char *out = malloc(strlen(yytext));
+							int count = 0;
+
+							for (int i = 0; i < strlen(yytext); i++) {
+								if (yytext[i] == 'X')
+									count++;
+								else if (yytext[i] == '-') {
+									char *sub = malloc(strlen(yytext));
+									sprintf(sub, "%d", count);
+									strcat(out, sub);
+									strcat(out, ".");
+									count = 0;
+								}
+							}
+							char *sub = malloc(strlen(yytext));
+							sprintf(sub, "%d", count);
+							strcat(out, sub);
+
+							printf("%s: is a double of length %s\n", yytext, out); }
 
 EQUALS-TO |
 EQUALS-TO-VALUE 	{ printf("%s: is an assignment\n", yytext); }

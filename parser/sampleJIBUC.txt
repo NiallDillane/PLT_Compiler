@@ -5,7 +5,8 @@ X-XX XY-1.
 MAIN.
 PRINT "Please enter a number? ". 
 INPUT Y-S.
-ZZZ EQUALS-TO-VALUE 15.00. 
+Y-S EQUALS-TO Z.
+Z EQUALS-TO-VALUE 15.00. 
 ADD Y-S TO Z. 
 PRINT "Result is "; Z.
 END-NOW.

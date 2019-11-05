@@ -15,7 +15,8 @@
 	char* catError(char *s, char *t);
 	char* doubleX(char *val);
 	int addVar(char *cap, char *id);
-	int checkVar(char *id1, char *id2);
+	char* lookup(char *id);
+	void checkVar(char *id1, char *id2);
 	int checkVal(char *id, char *val);
 
 	int yylineno;
@@ -57,10 +58,10 @@ stmts:
 ;
 
 stmt:
-	IDENTIFIER EQUALSTO IDENTIFIER EOL { checkCap($1, $3); }
+	IDENTIFIER EQUALSTO IDENTIFIER EOL { checkVar($1, $3); }
 	| IDENTIFIER EQUALSTOVALUE NUMBER EOL { checkVal($1, $3); }
-	| ADD NUMBER TO IDENTIFIER EOL { /* TODO */}
-	| ADD IDENTIFIER TO IDENTIFIER EOL { /* TODO */}
+	| ADD NUMBER TO IDENTIFIER EOL { checkVal($4, $2); }
+	| ADD IDENTIFIER TO IDENTIFIER EOL { checkVar($2, $4); }
 	| INPUT ins EOL
 	| OUTPUT outs EOL
 
@@ -80,9 +81,9 @@ extern FILE *yyin;
 int main() {
 	yyin = fopen("sampleJIBUC.txt", "r");
 	do yyparse();
-		while(!feof(yyin));
+		while (!feof(yyin));
 
-	if(valid)
+	if (valid)
 		printf(GRN "valid file\n" RESET);
 	return 0;
 }
@@ -101,8 +102,8 @@ char* catError(char *s, char *t) {
 }
 
 char* doubleX(char *val){
-	for(int j = 0; j < strlen(val); j++){
-		if(isdigit(val[j]))
+	for (int j = 0; j < strlen(val); j++){
+		if (isdigit(val[j]))
 			val[j] = 'X';
 		else
 			val[j] = '-';
@@ -112,11 +113,11 @@ char* doubleX(char *val){
 
 int addVar(char *cap, char *id) { 
 	int i;
-	for(i=0; i < 50; i++) {
-		if(varList[i][0] == '\0'){
+	for (i=0; i < 50; i++) {
+		if (varList[i][0] == '\0'){
 			break;
 		}
-		else if(strcmp(varList[i][1], id) == 0) { // check if id already exists
+		else if (strcmp(varList[i][1], id) == 0) { // check if id already exists
 			yyerror(catError("Variable already exists: ", id));
 			return 0;
 		}
@@ -129,35 +130,37 @@ int addVar(char *cap, char *id) {
 	return 0;
 }
 
-int checkVar(char *id1, char *id2){
-	int i;
-	for(i=0; i < 50; i++) {
-		if(varList[i][0] == '\0'){ // TODO: check if exists method
-			yyerror(catError("Variable not declared: ", id));
-			return 0;
-		}
-		else if(strcmp(varList[i][1], id) == 0) { 
-			char *valX = doubleX(val);
-
-			if(!(strcmp(varList[i][0], valX) == 0))
-				yyerror("id capacity and number format do not match");
-			return 0;
+char* lookup(char *id) {
+	for (int i=0; i < 50; i++) {
+		if (varList[i][0] == '\0')
+			return NULL;
+		else if (strcmp(varList[i][1], id) == 0){
+			return varList[i][0];
 		}
 	}
-	return 0;
+	return NULL;
+}
+
+void checkVar(char *id1, char *id2){
+	if (lookup(id1) == NULL)
+		yyerror(catError("id not declared: ", id1));
+	else if (lookup(id2) == NULL)
+		yyerror(catError("id not declared: ", id2));
+	else if (strcmp(lookup(id1), lookup(id2)) != 0)
+		yyerror("id capacities do not match");
 }
 
 int checkVal(char *id, char *val){
 	int i;
-	for(i=0; i < 50; i++) {
-		if(varList[i][0] == '\0'){
+	for (i=0; i < 50; i++) {
+		if (varList[i][0] == '\0'){
 			yyerror(catError("Variable not declared: ", id));
 			return 0;
 		}
-		else if(strcmp(varList[i][1], id) == 0) { 
+		else if (strcmp(varList[i][1], id) == 0) { 
 			char *valX = doubleX(val);
 
-			if(!(strcmp(varList[i][0], valX) == 0))
+			if (!(strcmp(varList[i][0], valX) == 0))
 				yyerror("id capacity and number format do not match");
 			return 0;
 		}
