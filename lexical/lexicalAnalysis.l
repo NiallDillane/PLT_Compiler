@@ -1,7 +1,8 @@
 %{
 	/*
-	 * Simple verb recognition
-	 * insert C libraries here
+	 * 13132911 - Niall Dillane
+	 * Note that I check standard ASCII quotes for strings,
+	 * not unicode ones from Word, which were in the test program.
 	*/
 	#include <stdlib.h>
 	#include <stdio.h>
@@ -30,6 +31,11 @@ END-NOW |
 MAIN 				   { printf("%s: is a keyword\n", yytext); }
 
 {doubleDec} 		{ 
+							/* For double length, which wasn't mentioned before
+							 * I was assessed, and was later removed as a requirement,
+							 * but I spent like 20 minutes on it sooo...
+							*/
+
 							char *out = malloc(strlen(yytext));
 							int count = 0;
 
@@ -66,7 +72,7 @@ PRINT 				{ printf("%s: is an output\n", yytext); }
 
 {id} 					{ printf("%s: is an identifier\n", yytext); }
 
-.[" "]*$ 			{ printf("%s: is the end of a line\n", yytext); }
+\. 			{ printf("%s: is the end of a line\n", yytext); }
 
 ; 						{ printf("%s: is a separator\n", yytext); }
 
