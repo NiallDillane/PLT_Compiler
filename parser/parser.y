@@ -79,6 +79,7 @@ outs:
 
 extern FILE *yyin;
 int main() {
+	// Read this file
 	yyin = fopen("sampleJIBUC.txt", "r");
 	do yyparse();
 		while (!feof(yyin));
