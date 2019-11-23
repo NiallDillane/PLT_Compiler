@@ -1,6 +1,5 @@
-parser: lexer.l parser.y lex.yy.c parser.tab.c
+parser:
 	flex lexer.l
-	bison -d parser.y
 	bison -dy parser.y
-	gcc -c lex.yy.c parser.tab.c
-	gcc -o parser lex.yy.o parser.tab.o -ll
+	gcc -c lex.yy.c y.tab.c
+	gcc -o parser lex.yy.o y.tab.o -ll
