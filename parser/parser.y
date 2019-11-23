@@ -66,14 +66,17 @@ stmt:
 	| OUTPUT outs EOL
 
 ins:
-	IDENTIFIER
-	| IDENTIFIER SEPARATOR ins
+	id
+	| id SEPARATOR ins
 
 outs:
-	IDENTIFIER
+	id
 	| STRING
-	| IDENTIFIER SEPARATOR outs
+	| id SEPARATOR outs
 	| STRING SEPARATOR outs
+
+id:
+  	IDENTIFIER { lookup($1); }
 %%
 
 
@@ -131,10 +134,13 @@ int addVar(char *cap, char *id) {
 	return 0;
 }
 
+/* find the capacity of an id */
 char* lookup(char *id) {
 	for (int i=0; i < 50; i++) {
-		if (varList[i][0] == '\0')
+		if (varList[i][0] == '\0'){
+			yyerror(catError("id not declared: ", id));
 			return NULL;
+		}
 		else if (strcmp(varList[i][1], id) == 0){
 			return varList[i][0];
 		}
@@ -144,9 +150,9 @@ char* lookup(char *id) {
 
 void checkVar(char *id1, char *id2){
 	if (lookup(id1) == NULL)
-		yyerror(catError("id not declared: ", id1));
+		; // id 1 not declared
 	else if (lookup(id2) == NULL)
-		yyerror(catError("id not declared: ", id2));
+		; // id 2 not declared
 	else if (strcmp(lookup(id1), lookup(id2)) != 0)
 		yyerror("id capacities do not match");
 }
