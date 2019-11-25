@@ -3,4 +3,4 @@
 *.yy.c
 *.o
 *.out
-./parser/parser
+parser
