@@ -1,7 +1,7 @@
 %{
 	/*
-	 * Simple verb recognition
-	 * insert C libraries here
+	 * JIBUC Lexer
+	 * 13132911 - Niall Dillane 
 	*/
 	#include "y.tab.h"
 %}
