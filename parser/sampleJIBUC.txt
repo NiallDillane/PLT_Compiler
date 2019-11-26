@@ -1,13 +1,11 @@
-START.
-XX-XX Y-S.
-XX-XXX Z. 
-X-XX XY-1.
+START. 
+XXX XY-1. 
+XXXX Y. 
+XXXX Z.
 MAIN.
 PRINT "Please enter a number? ". 
-INPUT Y-SS.
-YK-S EQUALS-TO Z.
-Z EQUALS-TO-VALUE 15.00. 
-ADD Y-S TO Z. 
-PRINT "Result is "; ZZ.
+INPUT Y.
+Z EQUALS-TO Z.
+ADD Y TO Z.
+PRINT XY;" + ";Y;"=";Z.
 END-NOW.
-
