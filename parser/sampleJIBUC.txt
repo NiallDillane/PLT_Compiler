@@ -7,5 +7,5 @@ PRINT "Please enter a number? ".
 INPUT Y.
 Z EQUALS-TO Z.
 ADD Y TO Z.
-PRINT XY;" + ";Y;"=";Z.
+PRINT XY-1;" + ";Y;"=";Z.
 END-NOW.
