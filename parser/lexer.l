@@ -1,7 +1,7 @@
 %{
 	/*
 	 * JIBUC Lexer
-	 * 13132911 - Niall Dillane 
+	 * Niall Dillane 
 	*/
 	#include "y.tab.h"
 %}

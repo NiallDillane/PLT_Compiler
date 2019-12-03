@@ -1,7 +1,7 @@
 %{
 /* 
  * JIBUC parser
- * 13132911 - Niall Dillane
+ * Niall Dillane
 */
 	#include <stdio.h>
 	#include <string.h>
