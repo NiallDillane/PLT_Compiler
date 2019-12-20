@@ -1,6 +1,6 @@
 %{
 	/*
-	 * 13132911 - Niall Dillane
+	 * Niall Dillane
 	 * Note that I check standard ASCII quotes for strings,
 	 * not unicode ones from Word, which were in the test program.
 	*/
